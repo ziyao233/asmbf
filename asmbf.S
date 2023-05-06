@@ -7,7 +7,6 @@
  */
 
 #define BRAINFUCK_MEM	(1024 * 1024 )
-
 #define O_RDONLY	00
 #define SEEK_SET	0
 #define SEEK_END	2
@@ -17,7 +16,6 @@
 #define MAP_ANONYMOUS	0x20
 
 	.global		_start
-
 	.text
 _start:
 /*
@@ -64,6 +62,7 @@ loadFile:
 	movq		%r14,		%rsi
 	addq		$BRAINFUCK_MEM,	%rsi		// Allocate only once
 	incq		%rsi				// The '\0'
+	pushq		%rsi
 	movq		$(PROT_READ | PROT_WRITE),%rdx
 	movq		$(MAP_ANONYMOUS | MAP_SHARED),%r10
 	xorq		%r9,		%r9
@@ -198,13 +197,14 @@ instEnd:
  *	Exit the program
  */
 exit:
-	movq		$0,		%rdi
-
 	/*	Exit gently	*/
 	movq		%r15,		%rdi
+	popq		%rsi
 	movq		$11,		%rax
 	syscall
+
 exitFinal:
+	xorq		%rdi,		%rdi
 	movq		$60,		%rax
 	syscall
 
