@@ -55,4 +55,4 @@ $ qemu-riscv64 asmbf-rv64 HelloWorld.bf
 
 ## Blog
 
-[Check here](https://blog.ziyao233.xyz/asmbf.html)
+[Check here](https://ziyao233.github.io/asmbf.html)
