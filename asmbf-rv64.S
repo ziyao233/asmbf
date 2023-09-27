@@ -26,6 +26,7 @@
 #define sys_openat		56
 #define sys_lseek		62
 #define sys_mmap		222
+#define sys_munmap		215
 
 	.global			_start
 	.text
@@ -198,6 +199,11 @@ instLoopEnd:
 	j		.interpreterLoop
 instEnd:
 
+exit:
+	mv		a0,		s0
+	mv		a1,		s5
+	li		a7,		sys_munmap
+	ecall
 exitFinal:
 	li		a7,		sys_exit
 	ecall
