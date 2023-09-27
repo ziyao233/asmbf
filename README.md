@@ -1,6 +1,6 @@
 # asmbf
 
-A brainfuck interpreter written in pure x86-64 AT&T-style assembly.
+Brainfuck interpreters written in pure assembly.
 
 Super small and easy to understand
 
@@ -35,6 +35,23 @@ Written in assembly, it is only available on x86-64 Linux platforms.
 
 Unfortunately, this interpreter will simply crash if you try to run a
 problemly brainfuck script.
+
+## rv64gc port
+
+asmbf has been ported to rv64gc platforms, see asmbf-rv64.S
+
+Compile it with
+
+```
+$ gcc asmbf.S -o asmbf -nostdlib -no-pie -mno-relax asmbf-rv64.S -o asmbf-rv64
+$ clang asmbf.S -o asmbf -nostdlib -no-pie -mno-relax asmbf-rv64.S -o asmbf-rv64
+```
+
+You could also try it with user mode QEMU, with command like
+
+```
+$ qemu-riscv64 asmbf-rv64 HelloWorld.bf
+```
 
 ## Blog
 
